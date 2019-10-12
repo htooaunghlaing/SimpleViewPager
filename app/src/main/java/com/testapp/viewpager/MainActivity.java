@@ -4,8 +4,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
@@ -46,14 +44,10 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         fragmentList.add(new PageItemFragment().newInstance(Utality.getRandomAlphabet(),Utality.getRandomColor()));
-        fragmentList.add(new PageItemFragment().newInstance(Utality.getRandomAlphabet(), Utality.getRandomColor()));
-        fragmentList.add(new PageItemFragment().newInstance(Utality.getRandomAlphabet(), Utality.getRandomColor()));
+        fragmentList.add(new PageItemFragment().newInstance(Utality.getRandomAlphabet(),Utality.getRandomColor()));
+        fragmentList.add(new PageItemFragment().newInstance(Utality.getRandomAlphabet(),Utality.getRandomColor()));
 
-        //setOffscreenPageLimit is minimum 1
-        if(fragmentList.size() >= 1){
-            viewpager.setOffscreenPageLimit(fragmentList.size());
-        }
-
+        viewpager.setOffscreenPageLimit(fragmentList.size());
         setupViewPager(viewpager);
 
         viewpager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
@@ -97,7 +91,11 @@ public class MainActivity extends AppCompatActivity {
         if (fragmentList.size() <= 1) {
             btnNext.setVisibility(View.INVISIBLE);
             btnPrev.setVisibility(View.INVISIBLE);
-        } else {
+        }
+
+        if(fragmentList.size() == 0) {
+            imgEmpty.setVisibility(View.VISIBLE);
+        }else{
             imgEmpty.setVisibility(View.GONE);
         }
 
@@ -138,19 +136,16 @@ public class MainActivity extends AppCompatActivity {
     private void addPage() {
         int pos = currentPage + 1;
         if (fragmentList.size() > 0) {
-            fragmentList.add(pos, new PageItemFragment().newInstance(Utality.getRandomAlphabet(), Utality.getRandomColor()));
+            fragmentList.add(pos, new PageItemFragment().newInstance(Utality.getRandomAlphabet(),Utality.getRandomColor()));
         } else {
             fragmentList.add(new PageItemFragment().newInstance(Utality.getRandomAlphabet(),Utality.getRandomColor()));
         }
         tabPagerAdapter.clear();
+
         tabPagerAdapter = new TabPagerAdapter(getSupportFragmentManager(), fragmentList);
         viewpager.setAdapter(tabPagerAdapter);
         tabPagerAdapter.notifyDataSetChanged();
-        if(fragmentList.size() >= 1){
-            viewpager.setOffscreenPageLimit(fragmentList.size());
-        }
         viewpager.setCurrentItem(pos);
-        viewpager.invalidate();
         pageControl();
     }
 
@@ -163,18 +158,13 @@ public class MainActivity extends AppCompatActivity {
             tabPagerAdapter = new TabPagerAdapter(getSupportFragmentManager(), fragmentList);
             viewpager.setAdapter(tabPagerAdapter);
             tabPagerAdapter.notifyDataSetChanged();
-            if(fragmentList.size() >= 1){
-                viewpager.setOffscreenPageLimit(fragmentList.size());
-            }
             viewpager.setCurrentItem(currentPage);
-            viewpager.invalidate();
             pageControl();
         } else {
             currentPage = 0;
             imgEmpty.setVisibility(View.VISIBLE);
             pageControl();
         }
-
     }
 
     public void showCurrentPage() {

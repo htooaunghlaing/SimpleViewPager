@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">ViewPager</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="red">RED</string>
+    <string name="blue">BLUE</string>
+    <string name="green">GREEN</string>
+    <string name="app_title">Test App</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

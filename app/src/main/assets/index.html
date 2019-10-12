@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+<head>
+    <meta name="viewport"
+          content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <style type='text/css'>
+
+p {
+   width: 0;
+   height: 0
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   font-size: 96px;
+}
+
+body {
+  display: grid;
+  place-items: center;
+  height: 100vh;
+}
+
+    </style>
+</head>
+<body>
+<p id="alphabet">A</p>
+
+<script type="text/javascript">
+<!-- function ran_col() { //function name-->
+<!--                var color = '#'; // hexadecimal starting symbol-->
+<!--                var letters = ['000000','FF0000','00FF00','0000FF','FFFF00','00FFFF','FF00FF','C0C0C0']; //Set your colors here-->
+<!--                color += letters[Math.floor(Math.random() * letters.length)];-->
+<!--                document.getElementById('p').style.background = color; // Setting the random color on your div element.-->
+<!--            }-->
+
+<!--            window.onerror = function(err) {-->
+<!--		log('window.onerror: ' + err)-->
+<!--	}-->
+    function setupWebViewJavascriptBridge(callback) {
+        if (window.WebViewJavascriptBridge) { return callback(WebViewJavascriptBridge); }
+        if (window.WVJBCallbacks) { return window.WVJBCallbacks.push(callback); }
+        window.WVJBCallbacks = [callback];
+        var WVJBIframe = document.createElement('iframe');
+        WVJBIframe.style.display = 'none';
+        WVJBIframe.src = 'wvjbscheme://__BRIDGE_LOADED__';
+        document.documentElement.appendChild(WVJBIframe);
+        setTimeout(function() { document.documentElement.removeChild(WVJBIframe) }, 0)
+    }
+    setupWebViewJavascriptBridge(function(bridge) {
+
+
+		bridge.registerHandler('testJavascriptHandler', function(data, responseCallback) {
+			var input = data.split(",") ;
+			document.getElementById("alphabet").innerHTML = input[0];
+<!--            var hue = 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')';-->
+<!--            document.body.style.backgroundColor = hue;-->
+            document.getElementById("alphabet").style.color = input[1];
+			responseCallback(data)
+		})
+	})
+</script>
+
+</body>
+</html>

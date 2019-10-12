@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:attrs="http://schemas.android.com/apk/res-auto"
+    tools:context=".MainActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+
+
+            <TextView
+                android:id="@+id/toolbar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/app_title"
+                style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+                android:textColor="@color/white" />
+
+            <ImageButton
+                android:id="@+id/btnAdd"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="left"
+                android:layout_marginStart="16dp"
+                android:background="?attr/selectableItemBackground"
+                android:src="@drawable/ic_add_black_24dp" />
+
+            <ImageButton
+                android:id="@+id/btnRemove"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="right"
+                android:layout_marginEnd="16dp"
+                android:background="?attr/selectableItemBackground"
+                android:src="@drawable/ic_delete_black_24dp"/>
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </androidx.viewpager.widget.ViewPager>
+
+    <ImageView
+        android:id="@+id/imgEmpty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:scaleType="fitXY"
+        android:visibility="gone"
+        android:src="@drawable/img_empty"/>
+
+
+    <RelativeLayout
+        android:id="@+id/bottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_gravity="bottom"
+        android:background="@color/colorAccent">
+
+        <ImageButton
+            android:id="@+id/btnPrev"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="16dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_chevron_left_black_24dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"/>
+
+        <ImageButton
+            android:id="@+id/btnNext"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="16dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_chevron_right_black_24dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"/>
+
+        <com.rd.PageIndicatorView
+            android:id="@+id/pageIndicatorView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            app:piv_animationType="worm"
+            app:piv_dynamicCount="true"
+            app:piv_interactiveAnimation="true"
+            app:piv_selectedColor="@color/white"
+            app:piv_unselectedColor="@color/gray_300"
+            app:piv_viewPager="@id/viewpager"
+            attrs:piv_padding="12dp"
+            attrs:piv_radius="8dp" />
+    </RelativeLayout>
+
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
